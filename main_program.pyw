@@ -38,7 +38,7 @@ class Config:
                     continue
                 key, value = line.split()
                 if key == Const.CONFIG_KEY_EN:
-                    self.en = bool(value)
+                    self.en = int(value) == 1
                 elif key == Const.CONFIG_KEY_MAX:
                     self.max = int(value)
                 elif key == Const.CONFIG_KEY_MIN:
@@ -50,8 +50,8 @@ class Config:
 
 def sendNotification(title: str, text: str):
     notification = Notify()
-    notification.title = "Cool Title"
-    notification.message = "Even cooler message."
+    notification.title = title
+    notification.message = text
     notification.send(block=False)
 
 
@@ -68,7 +68,6 @@ def main():
         else:
             if int(battery.percent) < int(config.min):
                 sendNotification("Low Battery, Plug-in charger", ("The Power is at " + str(battery.percent)))
-
             time.sleep(config.alertTimeInterval)
         config.readConfig()
 
