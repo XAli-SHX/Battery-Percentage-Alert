@@ -14,99 +14,52 @@ issue.
 This project throws a notification to the user whenever the charge levels of laptop battery falls below or above the
 specified levels. (Useful for maintaining charge at certain levels)
 
-[//]: # (## Features)
+## Features
 
-[//]: # ()
-[//]: # ([ ] Monitor the charge level of your laptop battery)
+- Monitor the charge level of your laptop battery
+- Notify you when the charge level is low
+- Notify you when the battery is sufficiently charged
+- Prevent unexpected shutdowns due to low battery
+- Control the application with a system tray icon
 
-[//]: # ()
-[//]: # ([ ] Notify you when the charge level is low)
+## Installation
 
-[//]: # ()
-[//]: # ([ ] Notify you when the battery is sufficiently charged)
+To install the program, simply run the command bellow:
 
-[//]: # ()
-[//]: # ([ ] Prevent unexpected shutdowns due to low battery)
+```
+pip install -r requirements.txt
+```
 
-[//]: # ()
-[//]: # (<br>)
+## How to use
 
-[//]: # ()
-[//]: # (## Installation)
+To use this tool, you can simply run the `main_program.pyw` script:
 
-[//]: # ()
-[//]: # (To use this tool, you will need to have [Python3]&#40;https://www.python.org/&#41; and the following libraries installed:)
+```
+pythonw main.pyw
+```
 
-[//]: # ()
-[//]: # (- [notify-py]&#40;https://github.com/ms7m/notify-py&#41;)
+### Config
 
-[//]: # (- [psutil]&#40;https://github.com/giampaolo/psutil&#41;)
+To set the threshold limits that trigger the notifications modify the `config.txt`
 
-[//]: # ()
-[//]: # (You can install this library using <i>'pip'</i>:)
+```
+en 1
+max 85
+min 25
+alert_time_interval 15
+```
 
-[//]: # ()
-[//]: # (```bash)
+- `en` sets the alert on or off. If you don't want the notification to alert you, set it to 0
+- `max` sets the maximum threshold of battery that is plugged in charger. It will notify you to unplug the charger if
+  the battery goes upper-more than that.
+- `min` sets the minimum threshold of battery that is unplugged. It will notify you to plug in the charger if
+  the battery goes lower than that.
+- `alert_time_interval` sets the system checking interval. For example if it's 15, it means that if there is an alert to
+  send, it will be sent in every 15 seconds.
 
-[//]: # (pip install notify-py)
+## Your Contributions
 
-[//]: # (```)
+All your contributions are welcome. If you have an idea for a new feature or have found a bug, please open an issue or
+submit a pull request :)
 
-[//]: # ()
-[//]: # (```bash)
-
-[//]: # (pip install psutil)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (<br>)
-
-[//]: # ()
-[//]: # (## Usage)
-
-[//]: # ()
-[//]: # (To use this tool, you can simply run the <b><i>main_program.pyw</i></b> script:)
-
-[//]: # ()
-[//]: # (```bash)
-
-[//]: # (python main_program.pyw)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (<br>)
-
-[//]: # (To set the threshold limits that trigger the notifications modify the <b><i>config.txt</i></b> where the first line contains the upper threshold limit and the second line, the lower threshold.)
-
-[//]: # ()
-[//]: # (For example, If you set the upper and lower limits to 85% and 35%, the contents of <b><i>config.txt</i></b> will be:)
-
-[//]: # ()
-[//]: # (```)
-
-[//]: # (85)
-
-[//]: # (35)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (<br>)
-
-[//]: # ()
-[//]: # (## Your Contributions)
-
-[//]: # ()
-[//]: # (All your contributions are welcome. If you have an idea for a new feature or have found a bug, please open an issue or)
-
-[//]: # (submit a pull request :&#41;)
-
-[//]: # ()
-[//]: # (<br>)
-
-[//]: # ()
-[//]: # (### Note: This project was meant to run in the background so I've saved the source file as .pyw instead of .py)
-
-[//]: # ()
+### Note: This project was meant to run in the background so I've saved the source file as .pyw instead of .py
