@@ -1,2 +1,4 @@
-85
-35
+en 1
+max 85
+min 35
+alert_time_interval 15
