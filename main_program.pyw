@@ -1,6 +1,9 @@
 from notifypy import Notify
 import psutil
 import time
+import pystray
+from PIL import Image
+import os
 
 
 class Const:
@@ -13,6 +16,11 @@ class Const:
     CONFIG_KEY_MAX = "max"
     CONFIG_KEY_MIN = "min"
     CONFIG_KEY_ALERT_TIME_INTERVAL = "alert_time_interval"
+
+    STRAY_ENABLE = "Enable"
+    STRAY_DISABLE = "Disable"
+    STRAY_OPEN_CONFIG = "Open config.txt"
+    STRAY_EXIT = "Exit"
 
 
 class Config:
@@ -47,12 +55,52 @@ class Config:
                     self.alertTimeInterval = int(value)
             fp.close()
 
+    def writeConfig(self):
+        en = 0
+        if self.en:
+            en = 1
+        with open(self.configPath, 'w') as fp:
+            fp.write(f"{Const.CONFIG_KEY_EN} {en}\n")
+            fp.write(f"{Const.CONFIG_KEY_MAX} {self.max}\n")
+            fp.write(f"{Const.CONFIG_KEY_MIN} {self.min}\n")
+            fp.write(f"{Const.CONFIG_KEY_ALERT_TIME_INTERVAL} {self.alertTimeInterval}")
+            fp.close()
+
 
 def sendNotification(title: str, text: str):
     notification = Notify()
     notification.title = title
     notification.message = text
     notification.send(block=False)
+
+
+def onIconClicked(stray, query):
+    query = str(query)
+    config = Config()
+    if query == Const.STRAY_ENABLE:
+        config.en = True
+    elif query == Const.STRAY_DISABLE:
+        config.en = False
+    elif query == Const.STRAY_OPEN_CONFIG:
+        os.startfile(str(os.path.dirname(os.path.abspath(__file__))) + '\\config.txt')
+    elif query == Const.STRAY_EXIT:
+        config.en = False
+        config.writeConfig()
+        stray.stop()
+        exit(0)
+    config.writeConfig()
+
+
+def setupStray():
+    image = Image.open("./assets/icon.png")
+    stray = pystray.Icon("Battery-Percentage-Alert", image,
+                         "Battery-Percentage-Alert",
+                         menu=pystray.Menu(
+                             pystray.MenuItem(Const.STRAY_ENABLE, onIconClicked),
+                             pystray.MenuItem(Const.STRAY_DISABLE, onIconClicked),
+                             pystray.MenuItem(Const.STRAY_OPEN_CONFIG, onIconClicked),
+                             pystray.MenuItem(Const.STRAY_EXIT, onIconClicked)))
+    stray.run()
 
 
 def main():
@@ -73,8 +121,9 @@ def main():
 
 if __name__ == "__main__":
     try:
+        setupStray()
         main()
     except Exception as e:
-        with open("./error.txt", 'w') as fp:
-            fp.write(str(e))
-            fp.close()
+        with open("./error.txt", 'w') as errorFile:
+            errorFile.write(str(e))
+            errorFile.close()
