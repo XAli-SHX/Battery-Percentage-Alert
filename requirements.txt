@@ -1,5 +1,0 @@
-colorama==0.4.5
-loguru==0.5.3
-notify-py==0.3.3
-psutil==5.9.1
-win32-setctime==1.1.0
