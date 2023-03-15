@@ -105,15 +105,14 @@ def setupStray():
 
 def main():
     config = Config()
-    config.readConfig()
-    while config.en:
+    while True:
         battery = psutil.sensors_battery()
         isPluggedIn = battery.power_plugged
         if isPluggedIn:
-            if int(battery.percent) > int(config.max):
+            if int(battery.percent) > int(config.max) and config.en:
                 sendNotification("Unplug charger", ("The Power is at " + str(battery.percent)))
         else:
-            if int(battery.percent) < int(config.min):
+            if int(battery.percent) < int(config.min) and config.en:
                 sendNotification("Low Battery, Plug-in charger", ("The Power is at " + str(battery.percent)))
         time.sleep(config.alertTimeInterval)
         config.readConfig()
