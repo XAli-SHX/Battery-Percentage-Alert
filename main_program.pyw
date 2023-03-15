@@ -64,11 +64,10 @@ def main():
         if isPluggedIn:
             if int(battery.percent) > int(config.max):
                 sendNotification("Unplug charger", ("The Power is at " + str(battery.percent)))
-            time.sleep(config.alertTimeInterval)
         else:
             if int(battery.percent) < int(config.min):
                 sendNotification("Low Battery, Plug-in charger", ("The Power is at " + str(battery.percent)))
-            time.sleep(config.alertTimeInterval)
+        time.sleep(config.alertTimeInterval)
         config.readConfig()
 
 
