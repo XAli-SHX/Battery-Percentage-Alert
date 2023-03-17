@@ -74,7 +74,7 @@ def sendNotification(title: str, text: str):
     notification.send(block=False)
 
 
-def onIconClicked(stray, query):
+def onIconRightClicked(stray, query):
     query = str(query)
     config = Config()
     if query == Const.STRAY_ENABLE:
@@ -84,7 +84,7 @@ def onIconClicked(stray, query):
         config.en = False
         sendNotification("Alert Disabled", "You can turn it on from the system tray icon.")
     elif query == Const.STRAY_OPEN_CONFIG:
-        os.startfile(str(os.path.dirname(os.path.abspath(__file__))) + '\\config.txt')
+        openConfigFile()
     elif query == Const.STRAY_EXIT:
         config.en = False
         config.writeConfig()
@@ -93,15 +93,24 @@ def onIconClicked(stray, query):
     config.writeConfig()
 
 
+# left click on icon is currently not supported by pystray library
+def onIconLeftClicked(icon, item):
+    openConfigFile()
+
+
+def openConfigFile():
+    os.startfile(str(os.path.dirname(os.path.abspath(__file__))) + '\\config.txt')
+
+
 def setupStray():
     image = Image.open("./assets/icon.png")
     stray = pystray.Icon("Battery-Percentage-Alert", image,
                          "Battery-Percentage-Alert",
                          menu=pystray.Menu(
-                             pystray.MenuItem(Const.STRAY_ENABLE, onIconClicked),
-                             pystray.MenuItem(Const.STRAY_DISABLE, onIconClicked),
-                             pystray.MenuItem(Const.STRAY_OPEN_CONFIG, onIconClicked),
-                             pystray.MenuItem(Const.STRAY_EXIT, onIconClicked)))
+                             pystray.MenuItem(Const.STRAY_ENABLE, onIconRightClicked),
+                             pystray.MenuItem(Const.STRAY_DISABLE, onIconRightClicked),
+                             pystray.MenuItem(Const.STRAY_OPEN_CONFIG, onIconRightClicked),
+                             pystray.MenuItem(Const.STRAY_EXIT, onIconRightClicked)))
     stray.run()
 
 
