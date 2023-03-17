@@ -79,8 +79,10 @@ def onIconClicked(stray, query):
     config = Config()
     if query == Const.STRAY_ENABLE:
         config.en = True
+        sendNotification("Alert Enabled", "You can turn it off from the system tray icon.")
     elif query == Const.STRAY_DISABLE:
         config.en = False
+        sendNotification("Alert Disabled", "You can turn it on from the system tray icon.")
     elif query == Const.STRAY_OPEN_CONFIG:
         os.startfile(str(os.path.dirname(os.path.abspath(__file__))) + '\\config.txt')
     elif query == Const.STRAY_EXIT:
@@ -105,6 +107,7 @@ def setupStray():
 
 def main():
     config = Config()
+    showSystemStatus(config)
     while True:
         battery = psutil.sensors_battery()
         isPluggedIn = battery.power_plugged
@@ -116,6 +119,13 @@ def main():
                 sendNotification("Low Battery, Plug-in charger", ("The Power is at " + str(battery.percent)))
         time.sleep(config.alertTimeInterval)
         config.readConfig()
+
+
+def showSystemStatus(config: Config):
+    if config.en:
+        sendNotification("Battery Percentage Alert", "Alert is enable")
+    else:
+        sendNotification("Battery Percentage Alert", "Alert is disable")
 
 
 if __name__ == "__main__":
