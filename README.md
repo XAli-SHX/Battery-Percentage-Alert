@@ -61,5 +61,3 @@ alert_time_interval 15
 
 All your contributions are welcome. If you have an idea for a new feature or have found a bug, please open an issue or
 submit a pull request :)
-
-### Note: This project was meant to run in the background so I've saved the source file as .pyw instead of .py
