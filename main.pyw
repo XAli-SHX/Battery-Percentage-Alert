@@ -6,6 +6,8 @@ from PIL import Image
 import os
 import threading
 
+appIsRunning = True
+
 
 class Const:
     CONFIG_FILE_PATH = "./config.txt"
@@ -87,10 +89,12 @@ def onIconRightClicked(stray, query):
     elif query == Const.STRAY_OPEN_CONFIG:
         openConfigFile()
     elif query == Const.STRAY_EXIT:
-        config.en = False
-        config.writeConfig()
+        # config.en = False
+        # config.writeConfig()
+        global appIsRunning
+        appIsRunning = False
         stray.stop()
-        exit(0)
+        # exit(0)
     config.writeConfig()
 
 
@@ -118,7 +122,7 @@ def setupStray():
 def main():
     config = Config()
     showSystemStatus(config)
-    while True:
+    while appIsRunning:
         battery = psutil.sensors_battery()
         isPluggedIn = battery.power_plugged
         if isPluggedIn:
@@ -129,7 +133,6 @@ def main():
                 sendNotification("Low Battery, Plug-in charger", ("The Power is at " + str(battery.percent)))
         time.sleep(config.alertTimeInterval)
         config.readConfig()
-        print('hey')
 
 
 def showSystemStatus(config: Config):
