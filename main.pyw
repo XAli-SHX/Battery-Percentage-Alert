@@ -4,6 +4,7 @@ import time
 import pystray
 from PIL import Image
 import os
+import threading
 
 
 class Const:
@@ -128,6 +129,7 @@ def main():
                 sendNotification("Low Battery, Plug-in charger", ("The Power is at " + str(battery.percent)))
         time.sleep(config.alertTimeInterval)
         config.readConfig()
+        print('hey')
 
 
 def showSystemStatus(config: Config):
@@ -139,8 +141,9 @@ def showSystemStatus(config: Config):
 
 if __name__ == "__main__":
     try:
+        mainFunctionThread = threading.Thread(target=main)
+        mainFunctionThread.start()
         setupStray()
-        main()
     except Exception as e:
         with open("./error.txt", 'w') as errorFile:
             errorFile.write(str(e))
