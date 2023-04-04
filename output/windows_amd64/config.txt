@@ -1,0 +1,4 @@
+en 1
+max 90
+min 21
+alert_time_interval 60

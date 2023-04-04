@@ -1,0 +1,101 @@
+{
+ "version": "auto-py-to-exe-configuration_v1",
+ "pyinstallerOptions": [
+  {
+   "optionDest": "noconfirm",
+   "value": true
+  },
+  {
+   "optionDest": "filenames",
+   "value": "D:/Projects/Python/Battery-Percentage-Alert/main.pyw"
+  },
+  {
+   "optionDest": "onefile",
+   "value": true
+  },
+  {
+   "optionDest": "console",
+   "value": true
+  },
+  {
+   "optionDest": "icon_file",
+   "value": "D:/Projects/Python/Battery-Percentage-Alert/assets/icon.ico"
+  },
+  {
+   "optionDest": "ascii",
+   "value": false
+  },
+  {
+   "optionDest": "clean_build",
+   "value": false
+  },
+  {
+   "optionDest": "strip",
+   "value": false
+  },
+  {
+   "optionDest": "noupx",
+   "value": false
+  },
+  {
+   "optionDest": "disable_windowed_traceback",
+   "value": false
+  },
+  {
+   "optionDest": "embed_manifest",
+   "value": true
+  },
+  {
+   "optionDest": "uac_admin",
+   "value": false
+  },
+  {
+   "optionDest": "uac_uiaccess",
+   "value": false
+  },
+  {
+   "optionDest": "win_private_assemblies",
+   "value": false
+  },
+  {
+   "optionDest": "win_no_prefer_redirects",
+   "value": false
+  },
+  {
+   "optionDest": "bootloader_ignore_signals",
+   "value": false
+  },
+  {
+   "optionDest": "argv_emulation",
+   "value": false
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Projects/Python/Battery-Percentage-Alert/assets;assets/"
+  },
+  {
+   "optionDest": "datas",
+   "value": "D:/Projects/Python/Battery-Percentage-Alert/config.txt;."
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "notifypy"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "psutil"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "pystray"
+  },
+  {
+   "optionDest": "hiddenimports",
+   "value": "PIL"
+  }
+ ],
+ "nonPyinstallerOptions": {
+  "increaseRecursionLimit": true,
+  "manualArguments": ""
+ }
+}
